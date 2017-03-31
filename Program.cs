@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +10,12 @@ namespace ProgrammingTask
 {
     class MainProgram
     {
+        public static string CurrentPath;
         static void Main(string[] args)
         {
+            Console.WriteLine("Please enter the current path of the directories:");
+            CurrentPath = Console.ReadLine();
+
             Console.WriteLine("Please enter the path or the file with extention .txt");
             string input = Console.ReadLine();
 
@@ -125,7 +129,8 @@ namespace ProgrammingTask
             List<LCSCandidate> longestSharedCandidates = filteredCandidates.OrderByDescending(s => s.score).ThenByDescending(c => c.tokens.Count).ToList();
 
             //after your loop
-            WriteCsvReport("H:\\SoftwareProductLines\\UofA\\Tasks\\Tokenization\\Task1\\Task1\\CSVReports", longestSharedCandidates);
+            string report = MainProgram.CurrentPath + "CSVReports";            
+            WriteCsvReport(report, longestSharedCandidates);
 
             Console.WriteLine("The End!");
 
@@ -136,8 +141,8 @@ namespace ProgrammingTask
             List<string> listOfFiles = null;
 
             //string Dir = Directory.GetCurrentDirectory().
-            string InternalDirectory = "H:\\SoftwareProductLines\\UofA\\Tasks\\Tokenization\\Task1\\Task1\\SourceFiles"; //Path.Combine(, "SourceFiles");
-
+            string InternalDirectory = MainProgram.CurrentPath + "SourceFiles";
+            
             if (CommandlineArguments != null /*&& CommandlineArguments.Count() > 1*/)
             {
                 //it is one file that has the list of files
